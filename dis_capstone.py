@@ -29,7 +29,7 @@ def _is_cpsr_thumb(frame):
 	try:
 		regs = frame.GetRegisters()[0]
 		cpsr = [reg for reg in regs if reg.GetName()=='cpsr'][0]
-		thumb_bit = int(cpsr.GetValue(), 16) and 0x20
+		thumb_bit = int(cpsr.GetValue(), 16) & 0x20
 		return thumb_bit >> 5
 	except:
 		return 0
