@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 '''
-Author: 
+Author:
 	upbit
 Date:
 	2014-12-02
@@ -22,7 +22,7 @@ bytes_to_hex = lambda bytes: " ".join([ "%.2X"%int(bytes[i]) for i in range(len(
 
 def __lldb_init_module (debugger, dict):
 	debugger.HandleCommand('command script add -f dis_capstone.dis_capstone discs')
-	print 'The "discs (dis_capstone)" command has been installed'
+	print('The "discs (dis_capstone)" command has been installed')
 
 def _is_cpsr_thumb(frame):
 	""" Check Thumb flag from CPSR """
@@ -103,13 +103,13 @@ def back_stacktrace(target, thread):
 			symbol_offset = file_addr - start_addr
 			if (symbol_offset < 0):
 				symbol_offset = 0
-			print "  frame #{num}: {addr:#016x} {mod}`{symbol} + {offset}".format(
-				num=i, addr=load_addr, mod=mods[i], symbol=symbols[i], offset=symbol_offset)
+			print("  frame #{num}: {addr:#016x} {mod}`{symbol} + {offset}".format(
+				num=i, addr=load_addr, mod=mods[i], symbol=symbols[i], offset=symbol_offset))
 		else:
-			print "  frame #{num}: {addr:#016x} {mod}`{func} at {file}:{line} {args}".format(
+			print("  frame #{num}: {addr:#016x} {mod}`{func} at {file}:{line} {args}".format(
 				num=i, addr=load_addr, mod=mods[i],
 				func='%s [inlined]' % funcs[i] if frame.IsInlined() else funcs[i],
-				file=files[i], line=lines[i], args=get_args_as_string(frame, showFuncName=False))
+				file=files[i], line=lines[i], args=get_args_as_string(frame, showFuncName=False)))
 
 
 def image_lookup_addr(addr):
@@ -142,7 +142,7 @@ def real_disassemble(debugger, start_addr, disasm_length, disasm_arch, disasm_mo
 			print("   0x%x:  %-16s %-8s %s" % (insn.address, bytes_to_hex(insn.bytes), insn.mnemonic, insn.op_str))
 
 	else:
-		print "[ERROR] ReadMemory(0x%x): %s" % (start_addr, error)
+		print("[ERROR] ReadMemory(0x%x): %s" % (start_addr, error))
 
 
 def dis_capstone(debugger, command, result, dict):
@@ -193,8 +193,8 @@ def dis_capstone(debugger, command, result, dict):
 
 	# show frame and addr info
 	if (options.full):
-		print "  %s, %s" % (thread, frame)
-		print image_lookup_addr(start_addr)
+		print("  %s, %s" % (thread, frame))
+		print(image_lookup_addr(start_addr))
 
 	##
 	real_disassemble(debugger, start_addr, disasm_length, disasm_arch, disasm_mode)
