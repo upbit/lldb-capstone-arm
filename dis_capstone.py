@@ -18,7 +18,7 @@ import optparse
 from capstone import *
 from capstone.arm import *
 
-bytes_to_hex = lambda bytes: " ".join([ "%.2X"%int(bytes[i]) for i in range(len(bytes)) ])
+bytes_to_hex = lambda bs: " ".join([ "%.2X"%int(bs[i]) for i in range(len(bs)) ])
 
 def __lldb_init_module (debugger, dict):
 	debugger.HandleCommand('command script add -f dis_capstone.dis_capstone discs')
